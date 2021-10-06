@@ -8,4 +8,4 @@ const reducer = (posts = [], action) => {
       return posts;
   }
 };
-export default reducer
+export default reducer;
