@@ -35,7 +35,7 @@ const Form = ({ currentId, setCurrentId }) => {
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (currentId) {
@@ -43,7 +43,7 @@ const Form = ({ currentId, setCurrentId }) => {
     } else {
        dispatch( createPost(postData));
     }
-    //clear();
+    clear();
   };
 
   return (
@@ -91,7 +91,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Tags (comma separated)"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(',') })}
         />
         <div className={classes.fileInput}>
           <FileBase

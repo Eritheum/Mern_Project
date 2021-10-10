@@ -1,10 +1,13 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
+import dotevn from 'dotenv'
 
 import postRoutes from "./routes/post.js";
 
 const app = express();
+dotevn.config();
+
 app.use(express.json({ limit: '30mb', extended: true }))
 app.use(express.urlencoded({ limit: '30mb', extended: true }))
 
@@ -12,11 +15,14 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 
-const CONNECTION_URL = `mongodb+srv://mern:Js053eDAviycXSJr@cluster0.xuv3i.mongodb.net/mern?retryWrites=true&w=majority`;
+app.get('/', (req, res)=>{
+  res.send("Hello Heroku here I come")
+})
+
 const PORT = process.env.PORT || 5000;
 
 mongoose
-  .connect(CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })

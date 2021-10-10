@@ -1,10 +1,14 @@
 import * as api from "../api/index";
+import * as actions from "../constants/actionTypes"
 
 //Action Creators
 export const getPosts = () => async (dispatch) => {
   try {
-    const {data}  = await api.fetchPosts();
-    dispatch({ type: "FETCH_ALL", payload: data });
+    const { data } = await api.fetchPosts();
+    dispatch({
+      type: actions.FETCH_ALL,
+      payload: data,
+    });
   } catch (error) {
     throw error;
   }
@@ -12,8 +16,11 @@ export const getPosts = () => async (dispatch) => {
 
 export const createPost = (post) => async (dispatch) => {
   try {
-    const {data} = await api.createPost(post);
-    dispatch({ type: "CREATE", payload: data });
+    const { data } = await api.createPost(post);
+    dispatch({
+      type: actions.CREATE,
+      payload: data,
+    });
   } catch (error) {
     throw error;
   }
@@ -21,8 +28,35 @@ export const createPost = (post) => async (dispatch) => {
 
 export const updatePost = (id, post) => async (dispatch) => {
   try {
-    const data = await api.updatePost(id, post);
-    dispatch({ type: "UPDATE", payload: data });
+    const { data } = await api.updatePost(id, post);
+    dispatch({
+      type: actions.UPDATE,
+      payload: data,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deletePost = (id) => async (dispatch) => {
+  try {
+    await api.deletePost(id);
+    dispatch({
+      type: actions.DELETE,
+      payload: id,
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const likePost = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.likePost(id);
+    dispatch({
+      type: actions.LIKE,
+      payload: data,
+    });
   } catch (error) {
     throw error;
   }
