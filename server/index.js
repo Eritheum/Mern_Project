@@ -15,10 +15,6 @@ app.use(cors());
 
 app.use("/posts", postRoutes);
 
-app.get('/', (req, res)=>{
-  res.send("Hello Heroku here I come")
-})
-
 const PORT = process.env.PORT || 5000;
 
 mongoose
